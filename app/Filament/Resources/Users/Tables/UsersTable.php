@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\Users\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -12,19 +14,19 @@ class UsersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->searchable() // Enable/Disable
             ->columns([
-                //
+                TextColumn::make('name'),
+                TextColumn::make('email')
             ])
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
             ])
-            ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+            ->toolbarActions([
+                CreateAction::make(),
             ]);
     }
 }
